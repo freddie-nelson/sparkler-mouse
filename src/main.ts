@@ -34,7 +34,7 @@ const handleParticles = () => {
     p.update();
     p.draw();
 
-    if (Date.now() - p.created > 500) {
+    if (Date.now() - p.created > 400) {
       particles.splice(i, 1);
     }
   }
@@ -44,18 +44,14 @@ const createParticle = () => {
   particles.push(new Particle(mouse.x, mouse.y, Date.now()));
 };
 
-let frameCount = 0;
 const MAX_FPS = 60;
 
 const animate = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   if (mouse.isPressed) createParticle();
   handleParticles();
-  requestAnimationFrame(animate);
-
-  frameCount++;
-  if (frameCount > MAX_FPS) frameCount = 0;
 };
 
-animate();
+setInterval(animate, 1000 / MAX_FPS);

@@ -22,8 +22,8 @@ export default class Particle {
 
     this.direction = Math.random() > 0.5 ? 1 : -1;
 
-    this.velY = -22 + (Math.random() * 15 - 5);
-    this.velX = 20 * this.direction;
+    this.velY = Math.random() * 30 - 30;
+    this.velX = (Math.random() * 10 + 10) * this.direction;
 
     this.fill = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(
       Math.random() * 255
