@@ -17,7 +17,7 @@ export default class Particle {
   constructor(x: number, y: number, created: number) {
     this.x = x;
     this.y = y;
-    this.size = 8;
+    this.size = Math.random() * 4 + 6;
     this.created = created;
 
     this.direction = Math.random() > 0.5 ? 1 : -1;
@@ -31,11 +31,14 @@ export default class Particle {
   }
 
   update() {
-    this.y += this.velY;
-    this.x += this.velX;
+    this.y += this.velY * (60 / window.FPS);
+    this.x += this.velX * (60 / window.FPS);
 
-    this.velX -= FRICTION * this.direction;
-    this.velY += WEIGHT;
+    this.velX -= FRICTION * this.direction * (60 / window.FPS);
+    if (this.direction === 1 && this.velX < 0) this.velX = 0;
+    else if (this.direction === -1 && this.velX > 0) this.velX = 0;
+
+    this.velY += WEIGHT * (60 / window.FPS);
   }
 
   draw() {
